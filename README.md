@@ -30,7 +30,8 @@ Set environment variables:
 # open the following file
 nano ~/.bash_profile
 # add the following lines of code to set environment variables
-# activate the API and get an API key ([APIs used](#apis-used))
+# activate the API and get an API key (get API key from docs referenced below)
+* [APIs used](#apis-used)
 export MAPS_KEY=<insertKey>
 export PORT='8080'
 # force session to read file
@@ -99,7 +100,7 @@ npm test
 [Google -- Geocoding API](https://developers.google.com/maps/documentation/geocoding/start "Google -- Geocoding API")
 
 > Documentation for:
-[Google -- Static Maps API](hhttps://developers.google.com/maps/documentation/static-maps/intro "Google -- Static Maps API")
+[Google -- Static Maps API](https://developers.google.com/maps/documentation/static-maps/intro "Google -- Static Maps API")
 
 # Challenge README
 
