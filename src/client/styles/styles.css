@@ -30,6 +30,9 @@ input:focus {
   width: 30%;
   margin: 100px auto;
 }
+img {
+  width: 100%
+}
 .icon {
   background: url(../icons/Search.png) 50% 50% no-repeat;
   background-size: 100%;
@@ -42,4 +45,27 @@ input:focus {
 }
 button {
   float: right;
+}
+.dest {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  background: #2980B9;
+  color: white;
+  margin: 0;
+  font-size: 18px;
+}
+.dist {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  background: #2980B9;
+  color: white;
+  margin: 0;
+  font-size: 18px;
+}
+.tags {
+  font-weight: bold;
 }
