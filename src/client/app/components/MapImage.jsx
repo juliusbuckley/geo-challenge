@@ -21,7 +21,7 @@ export default class MapImage extends Component {
           ></img>
           <div>
             <div className='dest'><span className='tags'>Destination:</span> { this.state.location }</div>
-            <div className='dist'><span className='tags'>Distance:</span> { this.state.distance }</div>
+            <div className='dist'><span className='tags'>Distance:</span> { this.state.distance } miles</div>
           </div>
         </div>
     );
