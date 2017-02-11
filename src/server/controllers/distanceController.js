@@ -2,44 +2,37 @@ import fs from 'fs';
 import axios from 'axios';
 import cvs from 'fast-csv';
 import qs from 'qs';
-// SEND HTTP REQUEST
-let minDistance = Number.MAX_NUM;
-let minLocation;
 
-const calculateDistance = (lat1, lat2, end) => {
+let minDistance = Number.MAX_VALUE;
+let minLocation = 'async';
+const calculateDistance = (lat1, long1, end) => {
   const lat2 = end.Latitude;
   const long2 = end.Longitude;
-  // distance calculation from http://www.movable-type.co.uk/scripts/latlong.html
-  const R = 6371e3;
-  const φ1 = lat1.toRadians();
-  const φ2 = lat2.toRadians();
-  const Δφ = (lat2 - lat1).toRadians();
-  const Δλ = (lon2 - lon1).toRadians();
-
-  const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-          Math.cos(φ1) * Math.cos(φ2) *
-          Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  const d = R * c;
+  // distance calculation from http://stackoverflow.com/a/38549345
+  const toRad = x => x * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(long2 - long1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * 
+    Math.cos(toRad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const d = 12742 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   if (d < minDistance) {
     minDistance = d;
     minLocation = end;
   }
 };
-
-const loadCsv = (starLat, startLong) => {
+const loadCsv = (lat, long) => {
   const stream = fs.createReadStream('store-locations.csv');
   cvs
     .fromStream(stream, { headers: [, , 'Address', 'City', 'State', 'Zip Code', 'Latitude', 'Longitude', , ] })
     .on('data', data => {
-      calculateDistance(startLat, startLong, data);
+      calculateDistance(lat, long, data);
     })
     .on('end', () => {
       console.log('done');
     });
 };
-
 const getLatLong = (req, res) => {
   const location = {
     address: req.body.address,
@@ -50,16 +43,21 @@ const getLatLong = (req, res) => {
   const searchUrl = 'https://maps.googleapis.com/maps/api/geocode/json?';
   const parameters = {
     address: `${location.address} ${location.city} ${location.state} ${location.zip}`,
-    key: process.env.MAP_API
+    key: process.env.MAPS_KEY
   };
   const apiUrl = searchUrl + qs.stringify(parameters);
   axios.get(apiUrl)
     .then(result => {
-      const lat = result.data.results.geometry.location.lat;
-      const long = result.data.results.geometry.location.long;
-      loadCsv(lat, long);
-      console.log('min', minDistance);
-      res.send('data');
+      const lat = result.data.results[0].geometry.location.lat;
+      const long = result.data.results[0].geometry.location.lng;
+      const promise = new Promise(resolve => {
+        loadCsv(lat, long);
+        setTimeout(() => resolve('Success'), 1000);
+      });
+      promise
+        .then((value) => {
+          res.send({ minDistance, minLocation });
+        });
     })
     .catch(error => { 
       if (error.response) {
@@ -72,5 +70,4 @@ const getLatLong = (req, res) => {
       console.error('Config:', error.config);
     });
 };
-
 export { getLatLong, loadCsv, calculateDistance };
