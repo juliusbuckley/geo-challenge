@@ -14,11 +14,8 @@ const config = {
     loaders: [
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loaders: ['react-hot-loader', 'babel-loader?presets[]=es2015,presets[]=react'],
+        exclude: /node_modules/
       },
       { 
         test: /\.css$/, 
@@ -38,7 +35,8 @@ const config = {
       'process.env': {
         'MAPS_KEY': JSON.stringify(process.env.MAPS_KEY)
       }
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
 
