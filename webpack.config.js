@@ -32,7 +32,14 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css']
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'MAPS_KEY': JSON.stringify(process.env.MAPS_KEY)
+      }
+    })
+  ]
 };
 
 module.exports = config;
