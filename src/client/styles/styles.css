@@ -1,0 +1,45 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: #4DA0B0;
+  background: -webkit-linear-gradient(to left, #4DA0B0 , #D39D38);
+  background: linear-gradient(to left, #4DA0B0 , #D39D38);
+}
+h1 {
+  background: #2980B9;
+  color: white;
+  margin: 0;
+  padding: 10px 40px;
+  font-size: 24px;
+  font-weight: normal;
+}
+input {
+  font-size: 18px;
+  background: #F7F7F7;
+  width: 100%;
+  padding: 13px 13px 13px 40px;
+  box-sizing: border-box;
+  color: #2980B9;
+  border: 3px solid rgba(0,0,0,0);
+}
+input:focus {
+  background: #FFF;
+  border: 3px solid #2980B9;
+  outline: none;
+}
+#container {
+  width: 30%;
+  margin: 100px auto;
+}
+.icon {
+  background: url(../icons/Search.png) 50% 50% no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  height: 4em;
+  position: absolute;
+  vertical-align: middle;
+  width: 20px;
+  margin-left: 12px;
+}
+button {
+  float: right;
+}
