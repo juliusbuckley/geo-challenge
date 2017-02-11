@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MapImage from './MapImage.jsx';
 
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      nearest: ''
+      location: '',
+      distance: '',
+      lat: '',
+      long: ''
     };
     this.focusInputonKeyDown = this.focusInputonKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +29,16 @@ export default class SearchBar extends Component {
     };
     axios.post('/distance', data)
       .then(nearestLocation => {
-        this.setState({nearest: nearestLocation.data});
+        const location = `${nearestLocation.data.minLocation.Address} ${nearestLocation.data.minLocation.City} ${nearestLocation.data.minLocation.State} ${nearestLocation.data.minLocation['Zip Code']}`;
+        const lat = nearestLocation.data.minLocation.Latitude;
+        const long = nearestLocation.data.minLocation.Longitude;
+        const distance = Math.floor(nearestLocation.data.minDistance);
+        this.setState({ 
+          location: location,
+          distance: distance,
+          lat: lat,
+          long: long
+        });
       })
       .catch(error => { 
         if (error.response) {
@@ -57,6 +70,10 @@ export default class SearchBar extends Component {
         <span className='icon'></span>
         <span className='search'></span>
         <input type='text' value={ this.state.value } placeholder='1770 Union St, San Francisco, CA 94115' onKeyDown={ this.submitInput } onChange={ this.handleChange } />
+        { 
+          this.state.lat.length && this.state.long.length ? 
+            <MapImage lat={ this.state.lat } long={ this.state.long } location={ this.state.location } distance={ this.state.distance }/> : null 
+        }
       </div>
     );
   }
