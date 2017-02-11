@@ -4,9 +4,9 @@
   "description": "react boilerplate",
   "main": "app.js",
   "scripts": {
-    "start": "npm run prod:buildserver; npm run webpack & node ./src/server-dist/app.js",
+    "start": "npm run prod:buildserver; node ./src/server-dist/app.js & npm run webpack",
     "prod:buildserver": "babel ./src/server -d ./src/server-dist --presets es2015 --copy-files",
-    "dev:start": "npm run webpack & nodemon ./src/server/app.js --exec babel-node --presets es2015",
+    "dev:start": "nodemon ./src/server/app.js --exec babel-node --presets es2015 & npm run webpack",
     "webpack": "./node_modules/.bin/webpack -d --watch",
     "test": "./node_modules/mocha/bin/mocha ./src/server-dist/test"
   },
