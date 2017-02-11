@@ -26,12 +26,12 @@
 #### Environment dependencies
 
 Set environment variables:
+* [APIs used](#apis-used)
 ```sh
 # open the following file
 nano ~/.bash_profile
 # add the following lines of code to set environment variables
-# activate the API and get an API key (get API key from docs referenced below)
-* [APIs used](#apis-used)
+# activate the API and get an API key (get API key from docs referenced in APIs used)
 export MAPS_KEY=<insertKey>
 export PORT='8080'
 # force session to read file
