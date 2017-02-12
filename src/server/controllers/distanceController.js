@@ -57,7 +57,7 @@ const getLatLong = (req, res) => {
         setTimeout(() => resolve('Success'), 1000);
       });
       promise
-        .then((value) => {
+        .then(value => {
           res.send({ minDistance, minLocation });
         });
     })
