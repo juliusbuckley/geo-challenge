@@ -70,7 +70,7 @@ export default class SearchBar extends Component {
         <h1>geo-location</h1>
         <span className='icon'></span>
         <span className='search'></span>
-        <input type='text' value={ this.state.value } placeholder='1770 Union St, San Francisco, CA 94115' onKeyDown={ this.submitInput } onChange={ this.handleChange } />
+        <input type='text' value={ this.state.value } placeholder='1770 Union St, San Francisco, CA 94115' onKeyDown={ this.submitInput } onChange={ this.handleChange }/>
         { 
           this.state.lat.length && this.state.long.length ? 
             <MapImage lat={ this.state.lat } long={ this.state.long } location={ this.state.location } distance={ this.state.distance }/> : null 
