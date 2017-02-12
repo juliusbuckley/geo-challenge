@@ -4,7 +4,7 @@ import cvs from 'fast-csv';
 import qs from 'qs';
 
 let minDistance = Number.MAX_VALUE;
-let minLocation = 'async';
+let minLocation;
 const calculateDistance = (lat1, long1, end) => {
   const lat2 = end.Latitude;
   const long2 = end.Longitude;
@@ -34,6 +34,8 @@ const loadCsv = (lat, long) => {
     });
 };
 const getLatLong = (req, res) => {
+  minDistance = Number.MAX_VALUE;
+  minLocation = undefined;
   const location = {
     address: req.body.address,
     city: req.body.city,
