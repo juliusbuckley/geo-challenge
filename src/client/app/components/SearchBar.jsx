@@ -21,7 +21,6 @@ export default class SearchBar extends Component {
     document.addEventListener('keydown', this.focusInputonKeyDown);
   }
   getNearestLocation(search) {
-    const _this = this;
     const searchArray = search.split(',');
     const data = {
       address: searchArray[0],
