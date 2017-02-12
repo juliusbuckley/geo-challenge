@@ -8,7 +8,8 @@ const PATHS = {
 };
 
 const config = {
-  entry: [PATHS.src, PATHS.cssSrc],
+  devtool: 'cheap-module-eval-source-map',
+  entry: [PATHS.src, PATHS.cssSrc, 'webpack-hot-middleware/client'],
   output: { path: PATHS.compiled, filename: 'app.bundle.js' },
   module: {
     loaders: [
