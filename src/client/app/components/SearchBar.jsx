@@ -15,11 +15,13 @@ export default class SearchBar extends Component {
     this.focusInputonKeyDown = this.focusInputonKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitInput = this.submitInput.bind(this);
+    this.getNearestLocation = this.getNearestLocation.bind(this);
   }
   componentWillMount() {
     document.addEventListener('keydown', this.focusInputonKeyDown);
   }
   getNearestLocation(search) {
+    const _this = this;
     const searchArray = search.split(',');
     const data = {
       address: searchArray[0],
@@ -29,7 +31,7 @@ export default class SearchBar extends Component {
     };
     axios.post('/distance', data)
       .then(nearestLocation => {
-        const location = `${nearestLocation.data.minLocation.Address} ${nearestLocation.data.minLocation.City} ${nearestLocation.data.minLocation.State} ${nearestLocation.data.minLocation['Zip Code']}`;
+        const location = `${nearestLocation.data.minLocation.Address}, ${nearestLocation.data.minLocation.City}, ${nearestLocation.data.minLocation.State} ${nearestLocation.data.minLocation['Zip Code']}`;
         const lat = nearestLocation.data.minLocation.Latitude;
         const long = nearestLocation.data.minLocation.Longitude;
         const distance = Math.floor(nearestLocation.data.minDistance);
