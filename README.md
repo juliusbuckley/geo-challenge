@@ -18,6 +18,8 @@
 
  * Node/Express
  * React
+ * Webpack
+ * Babel
  * Bootstrap
  * Mocha/Chai
 
