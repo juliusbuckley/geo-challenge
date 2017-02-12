@@ -16,7 +16,7 @@
 
 ## Description 
 
-Upon typing in an address in the proper format, a user fires off an `onKeyDown` event by pressing the enter button. At this point `getNearestLocation` is invoked with `this.state.value` as an argument.  The value is updated `onChange` by an event bound to the input field. After `getNearestLocation` is invoked data from the event is parsed and stored in a data object. A /POST request is then sent to and API endpoint with the data object. This /POST request is promisified with axios.
+Upon typing in an address in the proper format, a user fires off an `onKeyDown` event by pressing the enter button. At this point `getNearestLocation` is invoked with `this.state.value` as an argument.  The value is updated `onChange` by an event bound to the input field. After `getNearestLocation` is invoked data from the event is parsed and stored in a data object. A /POST request is then sent to an API endpoint with the data object. This /POST request is promisified with axios.
 
 The server receives a /POST request to its `/distance` endpoint and middlewear `getLatLong` is invoked. This method assigns `minDistance` to `Number.MAX_VALUE` and `minLocation` to `undefined`. Both of these variables are defined in the outer scope for use in `calculateDistance`. Location information is parsed from the request object and a /GET request is made to the Geocoding API endpoit. When the response comes back latitude and longitude are parsed and stored in variables.
 
