@@ -11,6 +11,14 @@ export default class MapImage extends Component {
       location: this.props.location.split('-')[0]
     };
   }
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      lat: nextProps.lat,
+      long: nextProps.long,
+      distance: nextProps.distance,
+      location: nextProps.location.split('-')[0]
+    });
+  }
   render() {
     return (
       <div>
