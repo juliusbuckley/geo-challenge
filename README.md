@@ -1,6 +1,6 @@
 # geo-location
 ## What is geo-location?
- > Returns the address of the geographically closest store from the dataset
+ > Returns the address of the geographically closest store from the dataset based upon input location
  
  ![geo-location Demo](./geo-location.gif "geo-location Demo gif")
  
