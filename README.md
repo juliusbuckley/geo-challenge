@@ -24,7 +24,7 @@ A promise is then instantiated and `loadCsv` is invoked with lat and long variab
 
 At this point, our promise resolves and a response is sent back to the client's request with a json encoded object containing `minDistance` and `minLocation`. The client receives this response and stores the data in variables, which are then used to `setState`. After the state is set there is a ternary condition that returns the `MapImage` component when `this.state.lat.length && this.state.long.length` are true. `MapImage` contains attributes, which are used to pass in the state as props.
 
-After `MapImage` receives new props the component renders. This component contains and `img` tag, which has a `src` attribute set to the Static Maps API endpoint. The response of this endpoint is a 432X300 map of the location from our dataset nearest to the input address.
+After `MapImage` receives new props the component renders. This component contains an `img` tag, which has a `src` attribute set to the Static Maps API endpoint. The response of this endpoint is a 432X300 map of the location from our dataset nearest to the input address.
 
 ## Technology Stack
 
