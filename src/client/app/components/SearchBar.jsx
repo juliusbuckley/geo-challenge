@@ -11,6 +11,7 @@ export default class SearchBar extends Component {
       distance: '',
       lat: '',
       long: ''
+      cheese: ''
     };
     this.focusInputonKeyDown = this.focusInputonKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -34,14 +35,14 @@ export default class SearchBar extends Component {
         const lat = nearestLocation.data.minLocation.Latitude;
         const long = nearestLocation.data.minLocation.Longitude;
         const distance = Math.floor(nearestLocation.data.minDistance);
-        this.setState({ 
+        this.setState({
           location: location,
           distance: distance,
           lat: lat,
           long: long
         });
       })
-      .catch(error => { 
+      .catch(error => {
         if (error.response) {
           console.error('Data:', error.response.data);
           console.error('Status:', error.response.status);
@@ -71,9 +72,9 @@ export default class SearchBar extends Component {
         <span className='icon'></span>
         <span className='search'></span>
         <input type='text' value={ this.state.value } placeholder='1770 Union St, San Francisco, CA 94115' onKeyDown={ this.submitInput } onChange={ this.handleChange }/>
-        { 
-          this.state.lat.length && this.state.long.length ? 
-            <MapImage lat={ this.state.lat } long={ this.state.long } location={ this.state.location } distance={ this.state.distance }/> : null 
+        {
+          this.state.lat.length && this.state.long.length ?
+            <MapImage lat={ this.state.lat } long={ this.state.long } location={ this.state.location } distance={ this.state.distance }/> : null
         }
       </div>
     );

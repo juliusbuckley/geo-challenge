@@ -10,6 +10,7 @@ const MapImage = props => (
       <div>
         <div className='dest'><span className='tags'>Destination:</span> { props.location }</div>
         <div className='dist'><span className='tags'>Distance:</span> { props.distance } miles</div>
+
       </div>
     </div>
 );
